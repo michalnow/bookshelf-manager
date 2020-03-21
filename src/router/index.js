@@ -4,7 +4,8 @@ import EditBook from "@/components/EditBook";
 import Landing from "@/components/Landing";
 import ViewBook from "@/components/ViewBook";
 import NewBook from "@/components/NewBook";
-import ShowBooks from "@/components/ShowBooks";
+import BookList from "@/components/book/BookList";
+import BookItem from "@/components/book/BookItem";
 Vue.use(Router);
 
 export default new Router({
@@ -25,14 +26,14 @@ export default new Router({
       component: NewBook
     },
     {
-      path: "/book/:book_id",
-      name: "ViewBook",
-      component: ViewBook
+      path: "/books",
+      name: "BookList",
+      component: BookList
     },
     {
-      path: "/books",
-      name: "ShowBooks",
-      component: ShowBooks
+      path: "/book/:bookId",
+      name: "BookItem",
+      component: BookItem
     }
   ]
 });
