@@ -1,30 +1,91 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12 sm8 offset-sm2 align-center justify-center>
+      <v-flex xs2 sm6 offset-sm3 align-center justify-center>
         <v-card class="elevation-12">
-          <v-toolbar dark color="primary">
-            <v-toolbar-title>Add new book</v-toolbar-title>
+          <v-toolbar color="indigo">
+            <v-spacer></v-spacer>
+            <v-toolbar-title style="color: white; fontSize: 24px; fontWeight: bold">Add new book</v-toolbar-title>
+            <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
             <v-container>
               <form>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-text-field name="emailid"></v-text-field>
+                    <v-text-field
+                      hint="Title"
+                      v-model="title"
+                      persistent-hint
+                      style="fontSize: 18px;"
+                    ></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-text-field name="password"></v-text-field>
+                    <v-text-field
+                      hint="Author"
+                      v-model="author"
+                      style="fontSize: 18px;"
+                      persistent-hint
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12>
+                    <v-select
+                      :items="items"
+                      hint="Genre"
+                      v-model="genre"
+                      style="fontSize: 18px"
+                      placeholder="click to select"
+                      persistent-hint
+                    ></v-select>
+                  </v-flex>
+                  <v-flex xs12>
+                    <v-text-field
+                      hint="Publish date"
+                      v-model="date"
+                      style="fontSize: 18px;"
+                      type="date"
+                      persistent-hint
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12>
+                    <v-text-field
+                      hint="Pages count"
+                      v-model="pages"
+                      style="fontSize: 18px;"
+                      persistent-hint
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12>
+                    <v-text-field
+                      hint="Poster link"
+                      v-model="poster"
+                      style="fontSize: 18px;"
+                      persistent-hint
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12>
+                    <v-textarea
+                      outlined
+                      style="marginTop: 10px; fontSize: 12px"
+                      hint="plot"
+                      v-model="plot"
+                      rows="2"
+                      persistent-hint
+                    ></v-textarea>
                   </v-flex>
                 </v-layout>
-                <v-layout row xs12>
+                <v-layout row style="textAlign: center">
                   <v-flex>
-                    <v-btn flat block color="primary" @click.prevent="validateBeforeSubmit">Sign In</v-btn>
-                  </v-flex>
-                  <v-flex>
-                    <v-btn flat block @click.prevent="clear">Clear</v-btn>
+                    <v-btn
+                      rounded
+                      outlined
+                      x-large
+                      color="indigo"
+                      style="width: 200px"
+                      @click="saveBook"
+                    >Save</v-btn>
                   </v-flex>
                 </v-layout>
               </form>
@@ -36,11 +97,52 @@
   </v-container>
 </template>
 
+
 <script>
+import db from "./firebaseInit";
 export default {
   name: "NewBook",
   data() {
-    return {};
+    return {
+      items: [
+        "Horror Fiction",
+        "Drama",
+        "Mystery",
+        "Romance Novel",
+        "Anime",
+        "Novel",
+        "Thriller",
+        "Fiction"
+      ],
+      title: null,
+      author: null,
+      date: null,
+      poster: null,
+      pages: null,
+      plot: null,
+      genre: null,
+      genreArr: null
+    };
+  },
+  methods: {
+    saveBook() {
+      db.collection("books")
+        .add({
+          title: this.title,
+          publishDate: this.date,
+          genre: this.genre,
+          author: this.author,
+          poster: this.poster,
+          plot: this.plot,
+          pages: this.pages
+        })
+        .then(docRef => {
+          this.$router.push("/books");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>
