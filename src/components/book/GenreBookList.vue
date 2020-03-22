@@ -40,15 +40,17 @@ export default {
   name: "BookList",
   data() {
     return {
-      books: []
+      books: [],
+      componentKey: 0
     };
   },
   created() {
     db.collection("books")
-
+      .where("genre", "==", this.$route.params.genre)
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
+          console.log(doc.data());
           const data = {
             id: doc.id,
             author: doc.data().author,

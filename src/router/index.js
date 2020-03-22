@@ -6,6 +6,7 @@ import ViewBook from "@/components/ViewBook";
 import NewBook from "@/components/NewBook";
 import BookList from "@/components/book/BookList";
 import BookItem from "@/components/book/BookItem";
+import GenreBookList from "@/components/book/GenreBookList";
 Vue.use(Router);
 
 export default new Router({
@@ -34,6 +35,11 @@ export default new Router({
       path: "/book/:bookId",
       name: "BookItem",
       component: BookItem
+    },
+    {
+      path: "/:genre",
+      name: "GenreBookList",
+      component: GenreBookList
     }
   ]
 });
