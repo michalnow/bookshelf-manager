@@ -1,39 +1,32 @@
 <template>
   <v-container>
-    <v-flex xs2 sm6 offset-sm2 align-center justify-center>
-      <div style="display: grid; gridTemplateColumns: repeat(4,1fr); gridGap: 30px ">
+    <v-flex xs2 sm12 offset-sm1 align-center justify-center>
+      <div style="display: grid; gridTemplateColumns: repeat(6,250px); gridGap: 1rem ">
         <div v-for="book in books" v-bind:key="book.id">
-          <v-chip style="marginBottom: 2px" outlined color="indigo">
+          <v-chip style="marginBottom: 2px" outlined color="indigo" small>
             <v-icon>mdi-book</v-icon>
             {{book.genre}}
           </v-chip>
-          <v-card class="elevation-8" max-width="320px" color="#C5CAE9">
-            <v-card-title
-              style="color: black; backgroundColor: #C5CAE9; fontSize: 24px; fontWeight: bold; textAlign: center"
-            >
-              <v-spacer></v-spacer>
-              {{book.title}}
-              <v-spacer></v-spacer>
-            </v-card-title>
-            <v-img :src="`${book.poster}`"></v-img>
-            <v-card-actions>
-              <v-row>
-                <v-col></v-col>
-                <v-col>
-                  <router-link :to="'/book/' + book.id">
-                    <v-btn
-                      color="indigo"
-                      x-large
-                      rounded
-                      style="textAlign: center; fontWeight: bold"
-                      outlined
-                      text
-                    >View details</v-btn>
-                  </router-link>
-                </v-col>
-                <v-col></v-col>
-              </v-row>
-            </v-card-actions>
+          <v-card
+            class="elevation-8"
+            max-width="200px"
+            color="white"
+            style="border: none; marginBottom: 5px"
+          >
+            <router-link :to="'/book/' + book.id" style="textDecoration: none; color: black">
+              <v-img
+                :src="`${book.poster}`"
+                style="backgroundSize: cover; width:300px; height: 300px"
+              ></v-img>
+              <h4 style="textAlign: center">{{book.title}}</h4>
+            </router-link>
+            <v-rating
+              v-model="book.rating"
+              color="yellow darken-3"
+              background-color="grey-darken-1"
+              half-increments
+              readonly
+            ></v-rating>
           </v-card>
         </div>
       </div>
@@ -52,8 +45,6 @@ export default {
   },
   created() {
     db.collection("books")
-      .orderBy("genre", "desc")
-
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -64,7 +55,8 @@ export default {
             genre: doc.data().genre,
             plot: doc.data().plot,
             poster: doc.data().poster,
-            publishDate: doc.data().publishDate
+            publishDate: doc.data().publishDate,
+            rating: doc.data().rating
           };
           this.books.push(data);
         });
