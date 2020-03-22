@@ -41,7 +41,7 @@
 <script>
 import db from "../firebaseInit.js";
 export default {
-  name: "BookList",
+  name: "GenreBookList",
   data() {
     return {
       books: [],

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="offset-1">
+    <div class="float-left pa-4">
       <h3 style="textAlign: left; padding: 4">MOST POPULAR</h3>
       <v-flex
         xs12
@@ -40,11 +40,12 @@
     </div>
 
     <div style="textAlign: center; marginRight: 20px">
-      <v-btn x-large style="border: solid; borderRadius: 15px; borderColor: indigo">SIgn Up</v-btn>
-      <v-btn x-large style="border: solid; borderRadius: 15px;borderColor: indigo ">
-        <v-spacer></v-spacer>Login&nbsp;
-        <v-spacer></v-spacer>
-      </v-btn>
+      <router-link link to="/register">
+        <v-btn x-large style="border: solid; borderRadius: 15px; borderColor: indigo">SIgn Up</v-btn>
+      </router-link>
+      <router-link link to="/login">
+        <v-btn x-large style="border: solid; borderRadius: 15px;borderColor: indigo ">Login&nbsp;</v-btn>
+      </router-link>
     </div>
   </v-container>
 </template>
@@ -52,7 +53,7 @@
 <script>
 import db from "./firebaseInit.js";
 export default {
-  name: "BookList",
+  name: "Landing",
   data() {
     return {
       books: []

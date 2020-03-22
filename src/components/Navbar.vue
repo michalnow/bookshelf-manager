@@ -43,12 +43,24 @@
           </v-btn>
         </router-link>
         <v-spacer></v-spacer>
-        <v-list dense color="indigo">
-          <v-list-item link to="/about">
-            <v-icon>mdi-help-circle</v-icon>
-            <h2 style="fontWeight: none">&nbsp;About</h2>
-          </v-list-item>
-        </v-list>
+        <v-icon v-if="isLoggedIn">mdi-account</v-icon>
+        <h4 v-if="isLoggedIn" style="marginRight: 10px">{{currentUser}}</h4>
+        <v-btn color="indigo" style="marginRight: 3px" link to="/about">
+          <v-icon>mdi-help-circle</v-icon>
+          <h2 style="fontWeight: none">&nbsp;About</h2>
+        </v-btn>
+        <v-btn v-if="!isLoggedIn" color="indigo" style="marginRight: 3px" link to="/register">
+          <v-icon>mdi-help-circle</v-icon>
+          <h2 style="fontWeight: none">Sign up</h2>
+        </v-btn>
+        <v-btn v-if="!isLoggedIn" color="indigo" style="marginRight: 3px" link to="/login">
+          <v-icon>mdi-help-circle</v-icon>
+          <h2 style="fontWeight: none">Log in</h2>
+        </v-btn>
+        <v-btn v-if="isLoggedIn" color="indigo" style="marginRight: 3px" v-on:click="logout">
+          <v-icon>mdi-help-circle</v-icon>
+          <h2 style="fontWeight: none">Log out</h2>
+        </v-btn>
       </v-app-bar>
 
       <v-footer color="indigo" app>
@@ -61,11 +73,14 @@
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   props: {
     source: String
   },
   data: () => ({
+    isLoggedIn: false,
+    currentUser: false,
     drawer: null,
     genres: [
       "Art",
@@ -99,9 +114,23 @@ export default {
       "Young Adult"
     ]
   }),
+  created() {
+    if (firebase.auth().currentUser) {
+      this.isLoggedIn = true;
+      this.currentUser = firebase.auth().currentUser.email;
+    }
+  },
   methods: {
-    forceReload() {
+    forceReload: function() {
       this.$router.go();
+    },
+    logout: function() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.go({ path: this.$router.path });
+        });
     }
   }
 };
