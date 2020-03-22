@@ -44,21 +44,20 @@
         </router-link>
         <v-spacer></v-spacer>
         <v-icon v-if="isLoggedIn">mdi-account</v-icon>
-        <h4 v-if="isLoggedIn" style="marginRight: 10px">{{currentUser}}</h4>
-        <v-btn color="indigo" style="marginRight: 3px" link to="/about">
-          <v-icon>mdi-help-circle</v-icon>
+        <h4 style="padding: 10px" v-if="isLoggedIn">{{currentUser}}</h4>
+        <v-btn rounded large link to="/about" style="marginRight: 10px" color="indigo darken-4" > 
+          
           <h2 style="fontWeight: none">&nbsp;About</h2>
         </v-btn>
-        <v-btn v-if="!isLoggedIn" color="indigo" style="marginRight: 3px" link to="/register">
-          <v-icon>mdi-help-circle</v-icon>
+        <v-btn rounded large v-if="!isLoggedIn"  link to="/register" style="marginRight: 10px" color="indigo darken-4" >
           <h2 style="fontWeight: none">Sign up</h2>
         </v-btn>
-        <v-btn v-if="!isLoggedIn" color="indigo" style="marginRight: 3px" link to="/login">
-          <v-icon>mdi-help-circle</v-icon>
+        <v-btn rounded large v-if="!isLoggedIn"  link to="/login" style="marginRight: 10px" color="green darken-3" >
+          <v-icon>mdi-login</v-icon>
           <h2 style="fontWeight: none">Log in</h2>
         </v-btn>
-        <v-btn v-if="isLoggedIn" color="indigo" style="marginRight: 3px" v-on:click="logout">
-          <v-icon>mdi-help-circle</v-icon>
+        <v-btn rounded large v-if="isLoggedIn" v-on:click="logout" style="marginRight: 10px" color="red darken-4">
+          <v-icon>mdi-logout</v-icon>
           <h2 style="fontWeight: none">Log out</h2>
         </v-btn>
       </v-app-bar>
