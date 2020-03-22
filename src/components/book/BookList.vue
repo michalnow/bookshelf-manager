@@ -46,6 +46,7 @@ export default {
   },
   created() {
     db.collection("books")
+
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
