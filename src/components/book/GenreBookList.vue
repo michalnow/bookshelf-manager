@@ -1,25 +1,29 @@
 <template>
-  <v-container>
-    <v-flex xs2 sm12 offset-sm1 align-center justify-center>
-      <div style="display: grid; gridTemplateColumns: repeat(6,250px); gridGap: 1rem ">
-        <div v-for="book in books" v-bind:key="book.id">
+  <div class="offset-2">
+    <v-flex
+      xs12
+      md4
+      align-center
+      justify-center
+      v-for="book in books  "
+      :key="book.id"
+      class="float-left pa-4"
+    >
+      <div offset-1>
+        <v-card width="320px" height="520px">
           <v-chip style="marginBottom: 2px" outlined color="indigo" small>
             <v-icon>mdi-book</v-icon>
             {{book.genre}}
           </v-chip>
-          <v-card
-            class="elevation-8"
-            max-width="200px"
-            color="white"
-            style="border: none; marginBottom: 5px"
-          >
-            <router-link :to="'/book/' + book.id" style="textDecoration: none; color: black">
-              <v-img
-                :src="`${book.poster}`"
-                style="backgroundSize: cover; width:300px; height: 300px"
-              ></v-img>
-              <h4 style="textAlign: center">{{book.title}}</h4>
-            </router-link>
+          <router-link :to="'/book/' + book.id" style="textDecoration: none; color: black">
+            <v-img contain :src="`${book.poster}`" style="backgroundSize: cover; height: 350px "></v-img>
+            <v-card-title style="textAlign: center; wordWrap: normal">
+              <v-spacer></v-spacer>
+              {{book.title}}
+              <v-spacer></v-spacer>
+            </v-card-title>
+          </router-link>
+          <div style="textAlign: center">
             <v-rating
               v-model="book.rating"
               color="yellow darken-3"
@@ -27,11 +31,11 @@
               half-increments
               readonly
             ></v-rating>
-          </v-card>
-        </div>
+          </div>
+        </v-card>
       </div>
     </v-flex>
-  </v-container>
+  </div>
 </template>
 
 <script>

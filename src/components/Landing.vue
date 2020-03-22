@@ -1,14 +1,83 @@
 <template>
-  <div id="landing">
-    <h3>Landing page</h3>
-  </div>
+  <v-container>
+    <div class="offset-1">
+      <h3 style="textAlign: left; padding: 4">MOST POPULAR</h3>
+      <v-flex
+        xs12
+        md4
+        align-center
+        justify-center
+        v-for="book in books  "
+        :key="book.id"
+        class="float-left pa-4"
+      >
+        <div offset-1>
+          <v-card width="290px" height="520px">
+            <v-chip style="marginBottom: 2px" outlined color="indigo" small>
+              <v-icon>mdi-book</v-icon>
+              {{book.genre}}
+            </v-chip>
+            <router-link :to="'/book/' + book.id" style="textDecoration: none; color: black">
+              <v-img contain :src="`${book.poster}`" style="backgroundSize: cover; height: 350px "></v-img>
+              <v-card-title style="textAlign: center">
+                <v-spacer></v-spacer>
+                {{book.title}}
+                <v-spacer></v-spacer>
+              </v-card-title>
+            </router-link>
+            <div style="textAlign: center">
+              <v-rating
+                v-model="book.rating"
+                color="yellow darken-3"
+                background-color="grey-darken-1"
+                half-increments
+                readonly
+              ></v-rating>
+            </div>
+          </v-card>
+        </div>
+      </v-flex>
+    </div>
+
+    <div style="textAlign: center; marginRight: 20px">
+      <v-btn x-large style="border: solid; borderRadius: 15px; borderColor: indigo">SIgn Up</v-btn>
+      <v-btn x-large style="border: solid; borderRadius: 15px;borderColor: indigo ">
+        <v-spacer></v-spacer>Login&nbsp;
+        <v-spacer></v-spacer>
+      </v-btn>
+    </div>
+  </v-container>
 </template>
 
 <script>
+import db from "./firebaseInit.js";
 export default {
-  name: "Landing",
+  name: "BookList",
   data() {
-    return {};
+    return {
+      books: []
+    };
+  },
+  created() {
+    db.collection("books")
+      .orderBy("rating", "desc")
+      .limit(5)
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const data = {
+            id: doc.id,
+            author: doc.data().author,
+            title: doc.data().title,
+            genre: doc.data().genre,
+            plot: doc.data().plot,
+            poster: doc.data().poster,
+            publishDate: doc.data().publishDate,
+            rating: doc.data().rating
+          };
+          this.books.push(data);
+        });
+      });
   }
 };
 </script>
