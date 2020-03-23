@@ -160,20 +160,22 @@ export default {
         this.book = data;
       });
 
-    db.collection("comments").onSnapshot(
-      snapshot => {
-        const documents = snapshot.docs.map(doc => {
-          const item = doc.data();
-          return item;
-        });
-        console.log(documents);
-        this.comments = documents;
-      },
-      error => {
-        // handle errors
-        alert("Error getting documents: " + error);
-      }
-    );
+    db.collection("comments")
+      .where("bookId", "==", this.$route.params.bookId)
+      .onSnapshot(
+        snapshot => {
+          const documents = snapshot.docs.map(doc => {
+            const item = doc.data();
+            return item;
+          });
+          console.log(documents);
+          this.comments = documents;
+        },
+        error => {
+          // handle errors
+          alert("Error getting documents: " + error);
+        }
+      );
   }
 };
 </script>
