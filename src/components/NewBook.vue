@@ -165,7 +165,7 @@ export default {
           poster: this.poster,
           plot: this.plot,
           pages: this.pages,
-          rating: this.rating
+          rating: parseFloat(this.rating)
         })
         .then(docRef => {
           this.$router.push("/books");

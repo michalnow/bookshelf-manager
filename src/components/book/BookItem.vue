@@ -164,7 +164,6 @@ export default {
       snapshot => {
         const documents = snapshot.docs.map(doc => {
           const item = doc.data();
-          console.log(doc.data().date);
           return item;
         });
         console.log(documents);

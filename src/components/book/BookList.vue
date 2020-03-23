@@ -49,7 +49,6 @@ export default {
   },
   created() {
     db.collection("books")
-
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -61,7 +60,7 @@ export default {
             plot: doc.data().plot,
             poster: doc.data().poster,
             publishDate: doc.data().publishDate,
-            rating: doc.data().rating
+            rating: parseFloat(doc.data().rating)
           };
           this.books.push(data);
         });
