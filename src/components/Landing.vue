@@ -40,10 +40,10 @@
     </div>
 
     <div style="textAlign: center; marginRight: 20px">
-      <router-link link to="/register">
+      <router-link v-if="!isLoggedIn" link to="/register">
         <v-btn x-large style="border: solid; borderRadius: 15px; borderColor: indigo">SIgn Up</v-btn>
       </router-link>
-      <router-link link to="/login">
+      <router-link v-if="!isLoggedIn" link to="/login">
         <v-btn x-large style="border: solid; borderRadius: 15px;borderColor: indigo ">Login&nbsp;</v-btn>
       </router-link>
     </div>
@@ -52,14 +52,21 @@
 
 <script>
 import db from "./firebaseInit.js";
+import firebase from "firebase";
 export default {
   name: "Landing",
   data() {
     return {
+      isLoggedIn: false,
       books: []
     };
   },
   created() {
+    if (firebase.auth().currentUser) {
+      this.isLoggedIn = true;
+      this.currentUser = firebase.auth().currentUser.email;
+    }
+
     db.collection("books")
       .orderBy("rating", "desc")
       .limit(5)
