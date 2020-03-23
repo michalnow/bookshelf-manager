@@ -120,7 +120,7 @@ export default {
     addComment: function() {
       const comms = this.book.comments;
       console.log(comms);
-      this.comment.date = new Date().toString().substring(4, 21);
+      this.comment.date = new Date();
       let comm = this.comment;
       //comms.push(this.comment);
       db.collection("comments")
@@ -164,6 +164,7 @@ export default {
       snapshot => {
         const documents = snapshot.docs.map(doc => {
           const item = doc.data();
+          console.log(doc.data().date);
           return item;
         });
         console.log(documents);

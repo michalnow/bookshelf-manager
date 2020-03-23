@@ -1,7 +1,9 @@
 <template>
   <div>
     <div v-for="comment in comments  " :key="comment.date">
-      <h4 style="textAlign: left">{{comment.author}} at {{comment.date}}</h4>
+      <h4
+        style="textAlign: left"
+      >{{comment.author}} at {{new Date(comment.date.seconds * 1000).toUTCString().substring(0,25)}}</h4>
       <v-spacer></v-spacer>
       <p class="font-italic font-weight-medium" style="fontSize: 18px">{{comment.content}}</p>
       <v-spacer></v-spacer>
