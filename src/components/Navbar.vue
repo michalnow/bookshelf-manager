@@ -4,7 +4,7 @@
     <v-app id="app">
       <v-navigation-drawer v-model="drawer" app>
         <v-list dense>
-          <v-list-item link to="/books">
+          <v-list-item link to="/books" @click="drawer = false">
             <v-list-item-action>
               <v-icon>mdi-book</v-icon>
             </v-list-item-action>
@@ -12,7 +12,7 @@
               <v-list-item-title style="fontSize: 16px">All Books</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item link to="/add">
+          <v-list-item link to="/add" @click="drawer = false">
             <v-list-item-action>
               <v-icon>mdi-plus</v-icon>
             </v-list-item-action>
@@ -45,18 +45,40 @@
         <v-spacer></v-spacer>
         <v-icon v-if="isLoggedIn">mdi-account</v-icon>
         <h4 style="padding: 10px" v-if="isLoggedIn">{{currentUser}}</h4>
-        <v-btn rounded large link to="/about" style="marginRight: 10px" color="indigo darken-4" > 
-          
+        <v-btn rounded large link to="/about" style="marginRight: 10px" color="indigo darken-4">
           <h2 style="fontWeight: none">&nbsp;About</h2>
         </v-btn>
-        <v-btn rounded large v-if="!isLoggedIn"  link to="/register" style="marginRight: 10px" color="indigo darken-4" >
+        <v-btn
+          rounded
+          large
+          v-if="!isLoggedIn"
+          link
+          to="/register"
+          style="marginRight: 10px"
+          color="indigo darken-4"
+        >
           <h2 style="fontWeight: none">Sign up</h2>
         </v-btn>
-        <v-btn rounded large v-if="!isLoggedIn"  link to="/login" style="marginRight: 10px" color="green darken-3" >
+        <v-btn
+          rounded
+          large
+          v-if="!isLoggedIn"
+          link
+          to="/login"
+          style="marginRight: 10px"
+          color="green darken-3"
+        >
           <v-icon>mdi-login</v-icon>
           <h2 style="fontWeight: none">Log in</h2>
         </v-btn>
-        <v-btn rounded large v-if="isLoggedIn" v-on:click="logout" style="marginRight: 10px" color="red darken-4">
+        <v-btn
+          rounded
+          large
+          v-if="isLoggedIn"
+          v-on:click="logout"
+          style="marginRight: 10px"
+          color="red darken-4"
+        >
           <v-icon>mdi-logout</v-icon>
           <h2 style="fontWeight: none">Log out</h2>
         </v-btn>
@@ -80,7 +102,7 @@ export default {
   data: () => ({
     isLoggedIn: false,
     currentUser: false,
-    drawer: null,
+    drawer: false,
     genres: [
       "Art",
       "Biography",
@@ -121,6 +143,7 @@ export default {
   },
   methods: {
     forceReload: function() {
+      this.drawer = false;
       this.$router.go();
     },
     logout: function() {

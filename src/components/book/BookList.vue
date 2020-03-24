@@ -1,26 +1,23 @@
 <template>
   <div class="offset-2">
     <v-form>
-          <v-row>
-            <v-col cols="12" sm="6" md="3">
-              <v-text-field loading
-            label="Search"
-          ></v-text-field>
-            </v-col>
-          </v-row>
-          
-      </v-form> git
+      <v-row>
+        <v-col></v-col>
+        <v-text-field style="textAlign: center" label="Search for the book" v-model="findName"></v-text-field>
+        <v-col></v-col>
+        <v-col></v-col>
+      </v-row>
+    </v-form>
     <v-flex
       xs12
       md4
       align-center
       justify-center
-      v-for="book in books  "
+      v-for="book in filteredBooks"
       :key="book.id"
       class="float-left pa-4"
     >
       <div offset-1>
-        <v-input type="text" width="200px" hint="elo" value="eloelo"/>
         <v-card width="320px" height="520px">
           <v-chip style="marginBottom: 2px" outlined color="indigo" small>
             <v-icon>mdi-book</v-icon>
@@ -55,7 +52,8 @@ export default {
   name: "BookList",
   data() {
     return {
-      books: []
+      books: [],
+      findName: ""
     };
   },
   created() {
@@ -76,6 +74,12 @@ export default {
           this.books.push(data);
         });
       });
+  },
+  computed: {
+    filteredBooks() {
+      let filter = new RegExp(this.findName, "i");
+      return this.books.filter(book => book.title.match(filter));
+    }
   }
 };
 </script>
