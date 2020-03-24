@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="comment in comments  " :key="comment.date">
+    <div v-for="(comment, idx) in comments  " :key="idx">
       <v-layout row style="margin:10px">
         <v-flex md6>
           <v-row>
@@ -9,9 +9,9 @@
           </v-row>
         </v-flex>
         <v-flex md6>
-          <h4
+          <h5
             style="textAlign: right; "
-          >{{new Date(comment.date.seconds * 1000).toUTCString().substring(0,25)}}</h4>
+          >{{new Date(comment.date.seconds * 1000).toUTCString().substring(0,25)}}</h5>
         </v-flex>
       </v-layout>
       <v-spacer></v-spacer>

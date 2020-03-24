@@ -1,20 +1,26 @@
 <template>
-  <v-container>
+  <v-container v-if="book !== null">
     <v-layout row offset-2>
       <v-flex sm12 md2></v-flex>
       <v-flex wm12 md8>
         <v-flex>
-          <div v-bind:key="this.book.id">
+          <div v-bind:key="book.id">
             <v-card style="padding: 10px;">
-              <v-chip style="marginBottom: 2px" outlined color="indigo">
-                <v-icon style="padding: 10px">mdi-book</v-icon>
-                {{book.genre}}
-              </v-chip>
+              <v-row>
+                <v-chip style="marginBottom: 2px" outlined color="indigo">
+                  <v-icon style="padding: 10px">mdi-book</v-icon>
+                  {{book.genre}}
+                </v-chip>
+                <v-spacer></v-spacer>
+                <v-chip style="marginBottom: 2px" outlined color="indigo" @click="onLikeClick()">
+                  <v-icon style="padding: 10px" :color="dynamicColor">mdi-heart</v-icon>Like
+                </v-chip>
+              </v-row>
               <v-card-title
                 style="color: black; fontSize: 24px; fontWeight: bold; textAlign: center"
               >
                 <v-spacer></v-spacer>
-                {{this.book.title}}
+                {{book.title}}
                 <v-spacer></v-spacer>
               </v-card-title>
               <v-card-text>
@@ -94,6 +100,8 @@ export default {
       book: null,
       isLoggedIn: false,
       currentUser: null,
+      color: "grey",
+      flag: false,
       comment: {
         bookId: null,
         author: null,
@@ -107,6 +115,9 @@ export default {
     CommentItem
   },
   methods: {
+    onLikeClick: function() {
+      this.flag = !this.flag;
+    },
     addComment: function() {
       const comms = this.book.comments;
       console.log(comms);
@@ -166,6 +177,11 @@ export default {
           alert("Error getting documents: " + error);
         }
       );
+  },
+  computed: {
+    dynamicColor() {
+      return this.flag ? "red" : "grey";
+    }
   }
 };
 </script>
