@@ -1,5 +1,15 @@
 <template>
   <div class="offset-2">
+    <v-form>
+          <v-row>
+            <v-col cols="12" sm="6" md="3">
+              <v-text-field loading
+            label="Search"
+          ></v-text-field>
+            </v-col>
+          </v-row>
+          
+      </v-form> git
     <v-flex
       xs12
       md4
