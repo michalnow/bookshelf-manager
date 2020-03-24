@@ -1,38 +1,58 @@
 <template>
-<v-container>
-  <v-layout row offset-2> 
-  <v-flex  sm12 md2>   </v-flex> 
-    <v-flex  wm12 md8>
-      <v-flex>
-          <div v-bind:key="this.book.id" >
-            <v-card style="padding: 10px;"> 
+  <v-container>
+    <v-layout row offset-2>
+      <v-flex sm12 md2></v-flex>
+      <v-flex wm12 md8>
+        <v-flex>
+          <div v-bind:key="this.book.id">
+            <v-card style="padding: 10px;">
               <v-chip style="marginBottom: 2px" outlined color="indigo">
                 <v-icon style="padding: 10px">mdi-book</v-icon>
                 {{book.genre}}
               </v-chip>
-            <v-card-title style="color: black; fontSize: 24px; fontWeight: bold; textAlign: center"> <v-spacer></v-spacer>{{this.book.title}} <v-spacer></v-spacer></v-card-title>
-            <v-card-text><b>Author:</b> {{book.author}} 
-              <br><b>Publish date:</b> {{book.publishDate}} 
-              <br><b>Pages:</b>  {{book.pages}} </v-card-text>
-          
-            <v-img :src="`${book.poster}`" style="width:300px; margin-left: auto;  margin-right: auto;" contain> </v-img> <v-spacer></v-spacer>        
-            <v-card-subtitle style="textAlign: justify; font-size: 16px;">{{book.plot}}</v-card-subtitle>   
+              <v-card-title
+                style="color: black; fontSize: 24px; fontWeight: bold; textAlign: center"
+              >
+                <v-spacer></v-spacer>
+                {{this.book.title}}
+                <v-spacer></v-spacer>
+              </v-card-title>
+              <v-card-text>
+                <b>Author:</b>
+                {{book.author}}
+                <br>
+                <b>Publish date:</b>
+                {{book.publishDate}}
+                <br>
+                <b>Pages:</b>
+                {{book.pages}}
+              </v-card-text>
+
+              <v-img
+                :src="`${book.poster}`"
+                style="width:300px; margin-left: auto;  margin-right: auto;"
+                contain
+              ></v-img>
+              <v-spacer></v-spacer>
+              <v-card-subtitle style="textAlign: justify; font-size: 16px;">{{book.plot}}</v-card-subtitle>
             </v-card>
           </div>
-          
-      </v-flex > 
-          <div v-bind:key="this.book.id" >
-            <v-card style="padding: 10px; margin-top:20px">
-               
-               <v-chip style="marginBottom: 2px; itemAlign:center" outlined color="indigo">
-                 <v-icon style="padding: 10px">mdi-chat</v-icon> 
-               <h4>REVIEWS HERE</h4>
-               </v-chip>
-               <v-spacer></v-spacer>
-              <CommentItem v-bind:comments="comments"></CommentItem>
+        </v-flex>
+        <div v-bind:key="this.book.id">
+          <v-card style="padding: 10px; margin-top:20px">
+            <v-row>
               <v-spacer></v-spacer>
-               <div>
-                 <v-textarea
+              <v-chip style="marginBottom: 2px; itemAlign:center" outlined color="indigo">
+                <v-icon style="padding: 10px">mdi-chat</v-icon>
+                <h2>Bookworms reviews</h2>
+              </v-chip>
+              <v-spacer></v-spacer>
+            </v-row>
+            <v-spacer></v-spacer>
+            <CommentItem v-bind:comments="comments"></CommentItem>
+            <v-spacer></v-spacer>
+            <div>
+              <v-textarea
                 v-model="comment.content"
                 rows="1"
                 style="border: solid; borderColor: gray; borderWidth: 1px; backgroundColor: white; marginBottom: 5px "
@@ -42,8 +62,9 @@
                 placeholder="review"
                 rounded
               ></v-textarea>
-               </div>
-               
+            </div>
+            <v-row>
+              <v-spacer></v-spacer>
               <v-btn
                 rounded
                 large
@@ -54,12 +75,12 @@
                 <v-icon>mdi-chat</v-icon>Add Comment
               </v-btn>
               <v-spacer></v-spacer>
-
-            </v-card>
-          </div>
-    </v-flex>
-  </v-layout> 
-</v-container>
+            </v-row>
+          </v-card>
+        </div>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

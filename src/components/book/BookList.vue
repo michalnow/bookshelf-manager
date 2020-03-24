@@ -1,5 +1,6 @@
 <template>
   <div class="offset-2">
+    <v-input type="text" width="200px" hint="elo"/>
     <v-flex
       xs12
       md4
