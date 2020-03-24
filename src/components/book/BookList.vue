@@ -1,12 +1,19 @@
 <template>
   <div class="offset-2">
-    <v-input type="text" width="200px" hint="elo"/>
+    <v-form>
+      <v-row>
+        <v-col></v-col>
+        <v-text-field style="textAlign: center" label="Search for the book" v-model="findName"></v-text-field>
+        <v-col></v-col>
+        <v-col></v-col>
+      </v-row>
+    </v-form>
     <v-flex
       xs12
       md4
       align-center
       justify-center
-      v-for="book in books  "
+      v-for="book in filteredBooks"
       :key="book.id"
       class="float-left pa-4"
     >
@@ -45,7 +52,8 @@ export default {
   name: "BookList",
   data() {
     return {
-      books: []
+      books: [],
+      findName: ""
     };
   },
   created() {
@@ -66,6 +74,12 @@ export default {
           this.books.push(data);
         });
       });
+  },
+  computed: {
+    filteredBooks() {
+      let filter = new RegExp(this.findName, "i");
+      return this.books.filter(book => book.title.match(filter));
+    }
   }
 };
 </script>
