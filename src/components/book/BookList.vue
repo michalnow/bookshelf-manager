@@ -1,6 +1,5 @@
 <template>
   <div class="offset-2">
-    <v-input type="text" width="200px" hint="elo"/>
     <v-flex
       xs12
       md4
@@ -11,6 +10,7 @@
       class="float-left pa-4"
     >
       <div offset-1>
+        <v-input type="text" width="200px" hint="elo" value="eloelo"/>
         <v-card width="320px" height="520px">
           <v-chip style="marginBottom: 2px" outlined color="indigo" small>
             <v-icon>mdi-book</v-icon>
