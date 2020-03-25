@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="book !== null">
+  <v-container v-if="book != null">
     <v-layout row offset-2>
       <v-flex sm12 md2></v-flex>
       <v-flex wm12 md8>
