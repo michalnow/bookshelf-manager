@@ -7,13 +7,19 @@
           <div v-bind:key="book.id">
             <v-card style="padding: 10px;">
               <v-row>
-                <v-chip style="marginBottom: 2px" outlined color="indigo">
+                <v-chip style="marginBottom: 2px; marginLeft:3px" outlined color="indigo">
                   <v-icon style="padding: 10px">mdi-book</v-icon>
                   {{book.genre}}
                 </v-chip>
                 <v-spacer></v-spacer>
-                <v-chip style="marginBottom: 2px" outlined color="indigo" @click="onLikeClick()">
-                  <v-icon style="padding: 10px" :color="dynamicColor">mdi-heart</v-icon>Like
+                <v-chip
+                  style="marginBottom: 2px; marginRight:3px"
+                  outlined
+                  color="indigo"
+                  @click="onLikeClick()"
+                >
+                  <v-icon style="padding: 10px" :color="dynamicColor">mdi-heart</v-icon>
+                  {{book.likes}}
                 </v-chip>
               </v-row>
               <v-card-title
@@ -102,6 +108,7 @@ export default {
       currentUser: null,
       color: "grey",
       flag: false,
+      likes: 0,
       comment: {
         bookId: null,
         author: null,
@@ -115,7 +122,30 @@ export default {
     CommentItem
   },
   methods: {
-    onLikeClick: function() {
+    onLikeClick: async function() {
+      if (!this.flag) {
+        let bookLikes = this.book.likes;
+        var batch = db.batch();
+        var querySnapshot = await db
+          .collection("books")
+          .where("title", "==", this.book.title)
+          .get();
+        querySnapshot.forEach(function(doc) {
+          batch.update(doc.ref, { likes: bookLikes + 1 });
+        });
+        batch.commit();
+      } else {
+        let bookLikes = this.book.likes;
+        var batch = db.batch();
+        var querySnapshot = await db
+          .collection("books")
+          .where("title", "==", this.book.title)
+          .get();
+        querySnapshot.forEach(function(doc) {
+          batch.update(doc.ref, { likes: bookLikes - 1 });
+        });
+        batch.commit();
+      }
       this.flag = !this.flag;
     },
     addComment: function() {
@@ -143,23 +173,13 @@ export default {
     }
 
     //console.log(this.$route.params.bookId);
-    db.collection("books")
-      .doc(this.$route.params.bookId)
-      .get()
-      .then(doc => {
-        const data = {
-          id: doc.id,
-          author: doc.data().author,
-          title: doc.data().title,
-          genre: doc.data().genre,
-          plot: doc.data().plot,
-          poster: doc.data().poster,
-          pages: doc.data().pages,
-          publishDate: doc.data().publishDate,
-          comments: doc.data().comments
-        };
-        this.book = data;
+    db.collection("books").onSnapshot(snapshot => {
+      const docs = snapshot.docs.map(doc => {
+        return doc.id == this.$route.params.bookId
+          ? (this.book = doc.data())
+          : null;
       });
+    });
 
     db.collection("comments")
       .where("bookId", "==", this.$route.params.bookId)
