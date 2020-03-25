@@ -19,7 +19,7 @@
                   @click="onLikeClick()"
                 >
                   <v-icon style="padding: 10px" :color="dynamicColor">mdi-heart</v-icon>
-                  {{book.likes}}
+                  <h4 v-if="this.book.likes.length != 0">{{book.likes.length}}</h4>
                 </v-chip>
               </v-row>
               <v-card-title
@@ -107,8 +107,7 @@ export default {
       isLoggedIn: false,
       currentUser: null,
       color: "grey",
-      flag: false,
-      likes: 0,
+      likes: [],
       comment: {
         bookId: null,
         author: null,
@@ -123,30 +122,34 @@ export default {
   },
   methods: {
     onLikeClick: async function() {
-      if (!this.flag) {
+      if (!this.book.likes.includes(this.currentUser)) {
         let bookLikes = this.book.likes;
+        bookLikes.push(this.currentUser);
         var batch = db.batch();
         var querySnapshot = await db
           .collection("books")
           .where("title", "==", this.book.title)
           .get();
         querySnapshot.forEach(function(doc) {
-          batch.update(doc.ref, { likes: bookLikes + 1 });
+          batch.update(doc.ref, { likes: bookLikes });
         });
         batch.commit();
       } else {
         let bookLikes = this.book.likes;
+        const index = bookLikes.indexOf(this.currentUser);
+        if (index > -1) {
+          bookLikes.splice(index, 1);
+        }
         var batch = db.batch();
         var querySnapshot = await db
           .collection("books")
           .where("title", "==", this.book.title)
           .get();
         querySnapshot.forEach(function(doc) {
-          batch.update(doc.ref, { likes: bookLikes - 1 });
+          batch.update(doc.ref, { likes: bookLikes });
         });
         batch.commit();
       }
-      this.flag = !this.flag;
     },
     addComment: function() {
       const comms = this.book.comments;
@@ -172,7 +175,6 @@ export default {
       this.comment.bookId = this.$route.params.bookId;
     }
 
-    //console.log(this.$route.params.bookId);
     db.collection("books").onSnapshot(snapshot => {
       const docs = snapshot.docs.map(doc => {
         return doc.id == this.$route.params.bookId
@@ -200,7 +202,7 @@ export default {
   },
   computed: {
     dynamicColor() {
-      return this.flag ? "red" : "grey";
+      return this.book.likes.includes(this.currentUser) ? "red" : "grey";
     }
   }
 };
