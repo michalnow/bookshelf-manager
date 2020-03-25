@@ -56,8 +56,8 @@
           </template>
 
           <v-list style="textAlign: center;" color="indigo">
-            <v-list-item>
-              <v-list-item-title style="color: white; fontWeight: bold; fontSize: 20px">My books</v-list-item-title>
+            <v-list-item link to="/myBooks" style="textDecoration: none" color="indigo">
+              <v-list-item-title style="color: white; fontWeight: bold; fontSize: 20px  ">My books</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
