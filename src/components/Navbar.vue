@@ -43,8 +43,24 @@
           </v-btn>
         </router-link>
         <v-spacer></v-spacer>
-        <v-icon v-if="isLoggedIn">mdi-account</v-icon>
-        <h4 style="padding: 10px" v-if="isLoggedIn">{{currentUser}}</h4>
+
+        <v-menu v-if="isLoggedIn" bottom origin="center center" transition="scale-transition">
+          <template v-slot:activator="{ on }">
+            <v-btn
+              rounded
+              large
+              style=" color: white; padding: 10px; text-transform-none; marginRight: 10px"
+              v-on="on"
+              color="indigo darken-4"
+            >{{currentUser}}</v-btn>
+          </template>
+
+          <v-list style="textAlign: center;" color="indigo">
+            <v-list-item>
+              <v-list-item-title style="color: white; fontWeight: bold; fontSize: 20px">My books</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
         <v-btn rounded large link to="/about" style="marginRight: 10px" color="indigo darken-4">
           <h2 style="fontWeight: none">&nbsp;About</h2>
         </v-btn>
