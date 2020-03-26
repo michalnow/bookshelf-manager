@@ -45,53 +45,39 @@
         </v-card>
       </div>
     </v-flex>
-    <div v-bind:key="this.book.id">
-      <v-card style="padding: 10px; margin-top:20px; marginBottom: 10px">
-        <v-row>
-          <v-spacer></v-spacer>
-          <v-chip style="marginBottom: 2px; itemAlign:center" outlined color="indigo">
-            <v-icon style="padding: 10px">mdi-chat</v-icon>
-            <h2>Bookworms reviews</h2>
-          </v-chip>
-          <v-spacer></v-spacer>
-        </v-row>
-        <v-spacer></v-spacer>
-        <CommentItem v-bind:comments="comments"></CommentItem>
-        <v-spacer></v-spacer>
-        <div>
-          <v-textarea
-            v-model="comment.content"
-            rows="1"
-            style="border: solid; borderColor: gray; borderWidth: 1px; backgroundColor: white; marginBottom: 5px "
-            auto-grow
-            clearable
-            dense
-            placeholder="review"
-            rounded
-          ></v-textarea>
-        </div>
-        <v-row>
-          <v-spacer></v-spacer>
-          <v-btn
-            rounded
-            large
-            @click="addComment()"
-            color="indigo darken-4"
-            style="color: white; marginBottom: 5px; "
-          >
-            <v-icon>mdi-chat</v-icon>Add Comment
-          </v-btn>
-          <v-spacer></v-spacer>
-        </v-row>
-      </v-card>
+    <div>
+      <CommentList v-bind:comments="comments"></CommentList>
+      <v-textarea
+        v-model="comment.content"
+        rows="1"
+        style="border: solid; borderColor: gray; borderWidth: 1px; backgroundColor: white; marginBottom: 5px "
+        auto-grow
+        clearable
+        dense
+        placeholder="review"
+        rounded
+      ></v-textarea>
     </div>
+    <v-row>
+      <v-spacer></v-spacer>
+      <v-btn
+        rounded
+        large
+        @click="addComment()"
+        color="indigo darken-4"
+        style="color: white; marginBottom: 5px; "
+      >
+        <v-icon>mdi-chat</v-icon>Add Comment
+      </v-btn>
+      <v-spacer></v-spacer>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import firebase from "firebase";
 import db from "../firebaseInit.js";
-import CommentItem from "../comments/CommentItem";
+import CommentList from "../comments/CommentList";
 export default {
   name: "BookItem",
   data() {
@@ -105,13 +91,15 @@ export default {
         bookId: null,
         author: null,
         date: null,
-        content: ""
+        content: "",
+        likes: [],
+        dislikes: []
       },
       comments: []
     };
   },
   components: {
-    CommentItem
+    CommentList
   },
   methods: {
     onLikeClick: async function() {
@@ -195,6 +183,7 @@ export default {
   },
   computed: {
     dynamicColor() {
+      console.log(this.comments);
       return this.book.likes.includes(this.currentUser) ? "red" : "grey";
     }
   }
