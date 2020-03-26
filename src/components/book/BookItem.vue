@@ -134,7 +134,6 @@ export default {
     },
     addComment: function() {
       const comms = this.book.comments;
-      console.log(comms);
       this.comment.date = new Date();
       let comm = this.comment;
       //comms.push(this.comment);
@@ -152,6 +151,7 @@ export default {
   created() {
     if (firebase.auth().currentUser) {
       this.isLoggedIn = true;
+      this.currentUser = firebase.auth().currentUser.email;
       this.comment.author = firebase.auth().currentUser.email;
       this.comment.bookId = this.$route.params.bookId;
     }
