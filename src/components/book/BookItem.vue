@@ -1,75 +1,84 @@
 <template>
   <v-container v-if="book != null">
-    <v-flex wm2 md12>
-      <div v-bind:key="book.id">
-        <v-card style="padding: 10px;">
-          <v-row>
-            <v-chip style="marginBottom: 2px; marginLeft:3px" outlined color="indigo">
-              <v-icon style="padding: 10px">mdi-book</v-icon>
-              {{book.genre}}
-            </v-chip>
-            <v-spacer></v-spacer>
-            <v-chip
-              style="marginBottom: 2px; marginRight:3px"
-              outlined
-              color="indigo"
-              @click="onLikeClick()"
-            >
-              <v-icon style="padding: 10px" :color="dynamicColor">mdi-heart</v-icon>
-              <h3 v-if="this.book.likes.length != 0">{{book.likes.length}}</h3>
-            </v-chip>
-          </v-row>
-          <v-card-title style="color: black; fontSize: 24px; fontWeight: bold; textAlign: center">
-            <v-spacer></v-spacer>
-            {{book.title}}
-            <v-spacer></v-spacer>
-          </v-card-title>
-          <v-card-text>
-            <b>Author:</b>
-            {{book.author}}
-            <br>
-            <b>Publish date:</b>
-            {{book.publishDate}}
-            <br>
-            <b>Pages:</b>
-            {{book.pages}}
-          </v-card-text>
-
-          <v-img
-            :src="`${book.poster}`"
-            style="width:300px; margin-left: auto;  margin-right: auto;"
-            contain
-          ></v-img>
-          <v-spacer></v-spacer>
-          <v-card-subtitle style="textAlign: justify; font-size: 16px;">{{book.plot}}</v-card-subtitle>
-        </v-card>
-      </div>
-    </v-flex>
-    <div>
-      <CommentList v-bind:comments="comments"></CommentList>
-      <v-textarea
-        v-model="comment.content"
-        rows="1"
-        style="border: solid; borderColor: gray; borderWidth: 1px; backgroundColor: white; marginBottom: 5px "
-        auto-grow
-        clearable
-        dense
-        placeholder="review"
-        rounded
-      ></v-textarea>
-    </div>
     <v-row>
-      <v-spacer></v-spacer>
-      <v-btn
-        rounded
-        large
-        @click="addComment()"
-        color="indigo darken-4"
-        style="color: white; marginBottom: 5px; "
-      >
-        <v-icon>mdi-chat</v-icon>Add Comment
-      </v-btn>
-      <v-spacer></v-spacer>
+      <v-col md="2"></v-col>
+      <v-col md="8">
+        <v-flex xs12 md12>
+          <div v-bind:key="book.id">
+            <v-card style="padding: 10px;">
+              <v-row>
+                <v-chip style="marginBottom: 2px; marginLeft:3px" outlined color="indigo">
+                  <v-icon style="padding: 10px">mdi-book</v-icon>
+                  {{book.genre}}
+                </v-chip>
+                <v-spacer></v-spacer>
+                <v-chip
+                  style="marginBottom: 2px; marginRight:3px"
+                  outlined
+                  color="indigo"
+                  @click="onLikeClick()"
+                >
+                  <v-icon style="padding: 10px" :color="dynamicColor">mdi-heart</v-icon>
+                  <h3 v-if="this.book.likes.length != 0">{{book.likes.length}}</h3>
+                </v-chip>
+              </v-row>
+              <v-card-title
+                style="color: black; fontSize: 24px; fontWeight: bold; textAlign: center"
+              >
+                <v-spacer></v-spacer>
+                {{book.title}}
+                <v-spacer></v-spacer>
+              </v-card-title>
+              <v-card-text>
+                <b>Author:</b>
+                {{book.author}}
+                <br>
+                <b>Publish date:</b>
+                {{book.publishDate}}
+                <br>
+                <b>Pages:</b>
+                {{book.pages}}
+              </v-card-text>
+
+              <v-img
+                :src="`${book.poster}`"
+                style="width:300px; margin-left: auto;  margin-right: auto;"
+                contain
+              ></v-img>
+              <v-spacer></v-spacer>
+              <v-card-subtitle style="textAlign: justify; font-size: 16px;">{{book.plot}}</v-card-subtitle>
+            </v-card>
+          </div>
+        </v-flex>
+
+        <div>
+          <CommentList v-bind:comments="comments"></CommentList>
+          <v-textarea
+            v-model="comment.content"
+            rows="1"
+            style="border: solid; borderColor: gray; borderWidth: 1px; backgroundColor: white; marginBottom: 5px "
+            auto-grow
+            clearable
+            dense
+            placeholder="review"
+            rounded
+          ></v-textarea>
+        </div>
+        <v-row>
+          <v-spacer></v-spacer>
+          <v-btn
+            rounded
+            large
+            @click="addComment()"
+            color="indigo darken-4"
+            style="color: white; marginBottom: 5px; "
+          >
+            <v-icon>mdi-chat</v-icon>Add Comment
+          </v-btn>
+          <v-spacer></v-spacer>
+        </v-row>
+      </v-col>
+      <v-col md="2"></v-col>
     </v-row>
   </v-container>
 </template>

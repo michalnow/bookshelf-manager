@@ -55,9 +55,14 @@
             >{{currentUser}}</v-btn>
           </template>
 
-          <v-list style="textAlign: center;" color="indigo">
-            <v-list-item>
-              <v-list-item-title style="color: white; fontWeight: bold; fontSize: 20px">My books</v-list-item-title>
+          <v-list color="indigo">
+            <v-list-item style="textAlign: center">
+              <router-link
+                :to="'/' + userUid + '/myBooks'"
+                style="textDecoration: none; textAlign: center"
+              >
+                <v-list-item-title style="color: white; fontWeight: bold; fontSize: 20px">My books</v-list-item-title>
+              </router-link>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -118,6 +123,7 @@ export default {
   data: () => ({
     isLoggedIn: false,
     currentUser: false,
+    userUid: "",
     drawer: false,
     genres: [
       "Art",
@@ -153,6 +159,7 @@ export default {
   }),
   created() {
     if (firebase.auth().currentUser) {
+      this.userUid = firebase.auth().currentUser.uid;
       this.isLoggedIn = true;
       this.currentUser = firebase.auth().currentUser.email;
     }
