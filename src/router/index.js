@@ -11,6 +11,7 @@ import MyBook from "@/components/bookshelf/MyBook";
 Vue.use(Router);
 
 import firebase from "firebase";
+import About from "@/components/About";
 
 let router = new Router({
   routes: [
@@ -23,6 +24,11 @@ let router = new Router({
       path: "/add",
       name: "NewBook",
       component: NewBook
+    },
+     {
+      path: "/add",
+      name: "About",
+      component: About
     },
     {
       path: "/books",
