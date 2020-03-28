@@ -7,7 +7,7 @@ import BookItem from "@/components/book/BookItem";
 import GenreBookList from "@/components/book/GenreBookList";
 import SignUp from "@/components/userManagment/SignUp";
 import Login from "@/components/userManagment/Login";
-import MyBook from "@/components/book/MyBook";
+import MyBook from "@/components/bookshelf/MyBook";
 Vue.use(Router);
 
 import firebase from "firebase";
