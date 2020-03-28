@@ -48,6 +48,7 @@ export default {
 
     db.collection("books")
       .where("favourites", "array-contains", this.currentUser)
+      .orderBy("title")
       .onSnapshot(
         snapshot => {
           const documents = snapshot.docs.map(doc => {
