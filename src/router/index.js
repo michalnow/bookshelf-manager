@@ -25,8 +25,8 @@ let router = new Router({
       name: "NewBook",
       component: NewBook
     },
-     {
-      path: "/add",
+    {
+      path: "/about",
       name: "About",
       component: About
     },
