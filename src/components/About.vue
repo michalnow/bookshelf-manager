@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div id="container">
-      <div id="naglowek">
+      <div id="header">
         <v-layout row wrap class="mt-2">
           <v-flex xs12>
             <v-carousel>
@@ -15,7 +15,7 @@
         </v-layout>
       </div>
 
-      <div id="lewy" class="aboutCenterColumn">
+      <div id="left" class="aboutCenterColumn">
         <h1>Who We Are</h1>
         <p>
           <em>Bookshelf Manager</em> is a vertical social network, dedicated to book lovers and all readers.
@@ -37,7 +37,7 @@
         </ul>
       </div>
 
-      <div id="srodek" class="aboutCenterColumn">
+      <div id="center" class="aboutCenterColumn">
         <h2>What else should you know about Bookshelf Manager?</h2>
         <p>
           All the contents of Bookshelf Manager can be searched even without being a member.
@@ -61,7 +61,7 @@
         <p>Knowledge is power, and power is best shared among readers.</p>
       </div>
 
-      <div id="prawy" class="aboutRightColumn">
+      <div id="right" class="aboutRightColumn">
         <ul>
           <li>
             <div class="aboutMetric">90 million</div>MEMBERS
@@ -124,27 +124,28 @@ export default {
 </script>
 
 <style scoped>
+
 #container {
   margin: 0 auto;
 }
 
-#naglowek {
+#header {
   text-align: center;
 }
 
-#lewy {
+#left {
   display: table-cell;
   min-height: 150px;
   width: 25%;
 }
 
-#srodek {
+#center {
   display: table-cell;
   min-height: 150px;
   width: 50%;
 }
 
-#prawy {
+#right {
   display: table-cell;
   min-height: 150px;
   width: 25%;
