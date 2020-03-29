@@ -29,7 +29,7 @@
         <h2>A Few Things You Can Do On Bookshelf Manager:</h2>
         <ul>
           <li>Build and update your profile.</li>
-          <li>Create your shelves and your wish list/</li>
+          <li>Create your shelves and your wish list.</li>
           <li>Track the books you're reading, have read, and want to read.</li>
           <li>Review and rate books that you read.</li>
           <li>Check out your personalized book recommendations.</li>
