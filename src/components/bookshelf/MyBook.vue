@@ -19,6 +19,15 @@
           <BookshelfWantToReadList :books="wantRead"></BookshelfWantToReadList>
         </v-expansion-panel-content>
       </v-expansion-panel>
+      <v-expansion-panel style="textAlign: center;">
+        <v-expansion-panel-header style="textAlign: center; fontSize: 20px;">
+          <v-spacer></v-spacer>Reading
+          <v-spacer></v-spacer>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content style="marginTop: -15px">
+          <BookshelfReadingList :books="reading"></BookshelfReadingList>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
     </v-expansion-panels>
   </v-container>
 </template>
@@ -28,18 +37,21 @@ import db from "../firebaseInit.js";
 import firebase from "firebase";
 import BookshelfList from "./BookshelfList";
 import BookshelfWantToReadList from "./BookshelfWantToReadList";
+import BookshelfReadingList from "./BookshelfReadingList";
 export default {
   name: "MyBook",
   data() {
     return {
       bookshelf: [],
       wantRead: [],
+      reading: [],
       currentUser: ""
     };
   },
   components: {
     BookshelfList,
-    BookshelfWantToReadList
+    BookshelfWantToReadList,
+    BookshelfReadingList
   },
   created() {
     if (firebase.auth().currentUser) {
@@ -74,6 +86,23 @@ export default {
             return item;
           });
           this.wantRead = documents;
+        },
+        error => {
+          // handle errors
+          alert("Error getting documents: " + error);
+        }
+      );
+
+    db.collection("books")
+      .where("reading", "array-contains", this.currentUser)
+      .onSnapshot(
+        snapshot => {
+          const documents = snapshot.docs.map(doc => {
+            const item = doc.data();
+            item.id = doc.id;
+            return item;
+          });
+          this.reading = documents;
         },
         error => {
           // handle errors

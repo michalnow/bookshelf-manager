@@ -2,20 +2,24 @@
   <v-flex xs12 class="float-left pa-3">
     <v-card width="180px" height="240px;" v-if="book != null" shaped>
       <v-row style="textAlign: center">
-        <v-spacer></v-spacer>
         <v-col style="marginTop: -12px">
+          <v-icon
+            @click="onReading"
+            color="green"
+            style="textDecoration: none; boxShadow: none"
+          >mdi-book-open-page-variant</v-icon>
           <v-icon
             @click="onWantRead"
             color="blue"
             style="textDecoration: none; boxShadow: none"
           >mdi-book-search</v-icon>
+
           <v-icon
             color="red"
             @click="onDelete"
             style="textDecoration: none; boxShadow: none"
           >mdi-delete-forever</v-icon>
         </v-col>
-        <v-spacer></v-spacer>
       </v-row>
       <router-link :to="'/book/' + book.id" style="textDecoration: none; color: black">
         <v-img contain :src="`${book.poster}`" style="backgroundSize: cover; height: 150px "></v-img>
@@ -99,6 +103,29 @@ export default {
           batch.update(doc.ref, {
             favourites: bookfavourites,
             wantRead: bookWantRead
+          });
+        });
+        batch.commit();
+      }
+    },
+    onReading: async function() {
+      if (this.book.favourites.includes(this.currentUser)) {
+        let bookfavourites = this.book.favourites;
+        let booksReading = this.book.reading;
+        booksReading.push(this.currentUser);
+        const index = bookfavourites.indexOf(this.currentUser);
+        if (index > -1) {
+          bookfavourites.splice(index, 1);
+        }
+        var batch = db.batch();
+        var querySnapshot = await db
+          .collection("books")
+          .where("title", "==", this.book.title)
+          .get();
+        querySnapshot.forEach(function(doc) {
+          batch.update(doc.ref, {
+            favourites: bookfavourites,
+            reading: booksReading
           });
         });
         batch.commit();
