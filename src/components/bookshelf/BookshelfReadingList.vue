@@ -4,7 +4,7 @@
       <div>
         <v-flex align-center justify-center v-for="book in books" :key="book.id">
           <div>
-            <BookshelfWantToReadItem :book="book"></BookshelfWantToReadItem>
+            <BookshelfReadingItem :book="book"></BookshelfReadingItem>
           </div>
         </v-flex>
       </div>
@@ -15,16 +15,16 @@
 <script>
 import db from "../firebaseInit.js";
 import firebase from "firebase";
-import BookshelfWantToReadItem from "./BookshelfWantToReadItem";
+import BookshelfReadingItem from "./BookshelfReadingItem";
 export default {
-  name: "BookshelfWantToReadList",
+  name: "BookshelfReadingList",
   data() {
     return {
       currentUser: ""
     };
   },
   components: {
-    BookshelfWantToReadItem
+    BookshelfReadingItem
   },
   props: {
     books: Array

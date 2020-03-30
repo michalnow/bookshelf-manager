@@ -58,13 +58,13 @@ export default {
   },
   methods: {
     onDelete: async function() {
-      if (this.book.wantRead.includes(this.currentUser)) {
-        let booksWantRead = this.book.wantRead;
+      if (this.book.reading.includes(this.currentUser)) {
+        let boksReading = this.book.reading;
         let bookfavourites = this.book.favourites;
         bookfavourites.push(this.currentUser);
-        const index = booksWantRead.indexOf(this.currentUser);
+        const index = boksReading.indexOf(this.currentUser);
         if (index > -1) {
-          booksWantRead.splice(index, 1);
+          boksReading.splice(index, 1);
         }
         var batch = db.batch();
         var querySnapshot = await db
@@ -73,7 +73,7 @@ export default {
           .get();
         querySnapshot.forEach(function(doc) {
           batch.update(doc.ref, {
-            wantRead: booksWantRead,
+            reading: boksReading,
             favourites: bookfavourites
           });
         });
