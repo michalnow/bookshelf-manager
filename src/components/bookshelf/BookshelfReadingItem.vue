@@ -12,6 +12,12 @@
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
+      <v-overlay :value="overlay">
+        <BookRateItem :book="book"></BookRateItem>
+        <v-btn icon @click="overlay = false" x large>
+          <v-icon color="red" style="fontSize: 24px">mdi-close</v-icon>
+        </v-btn>
+      </v-overlay>
       <router-link :to="'/book/' + book.id" style="textDecoration: none; color: black">
         <v-img contain :src="`${book.poster}`" style="backgroundSize: cover; height: 150px "></v-img>
         <v-card-title
@@ -32,23 +38,29 @@
         </v-card-title>
       </router-link>
     </v-card>
+    <v-btn @click="onRate" small color="white">Rate book</v-btn>
   </v-flex>
 </template>
 
 <script>
 import db from "../firebaseInit.js";
 import firebase from "firebase";
+import BookRateItem from "./BookRateItem";
 
 export default {
-  name: "BookListItem",
+  name: "BookReadingItem",
   data() {
     return {
       isLoggedIn: false,
-      currentUser: ""
+      currentUser: "",
+      overlay: false
     };
   },
   props: {
     book: Object
+  },
+  components: {
+    BookRateItem
   },
   created() {
     if (firebase.auth().currentUser) {
@@ -79,8 +91,12 @@ export default {
         });
         batch.commit();
       }
+    },
+    onRate: function() {
+      this.overlay = !this.overlay;
     }
   },
+
   computed: {}
 };
 </script>
