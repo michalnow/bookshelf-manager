@@ -67,11 +67,11 @@ export default {
   },
   methods: {
     onRate: async function() {
-      if (this.book.userRating.some(e => e.email == this.currentUser)) {
+      if (this.book.usersRating.some(e => e.email == this.currentUser)) {
         let bookRate = (this.bookRating + this.book.rating) / 2;
         let userRate = this.bookRating;
         let user = this.currentUser;
-        let userRatingArr = this.book.userRating;
+        let userRatingArr = this.book.usersRating;
 
         userRatingArr.map(obj => {
           if (obj.email == this.currentUser) {
@@ -95,7 +95,7 @@ export default {
         let bookRate = (this.bookRating + this.book.rating) / 2;
         let userRate = this.bookRating;
         let user = this.currentUser;
-        let userRatingArr = this.book.userRating;
+        let userRatingArr = this.book.usersRating;
 
         userRatingArr.push({ email: this.currentUser, rate: this.bookRating });
 
