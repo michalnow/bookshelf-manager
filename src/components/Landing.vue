@@ -7,7 +7,7 @@
         md4
         align-center
         justify-center
-        v-for="book in books  "
+        v-for="book in books"
         :key="book.id"
         class="float-left pa-4"
       >

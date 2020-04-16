@@ -96,7 +96,6 @@ export default {
       this.overlay = !this.overlay;
     }
   },
-
   computed: {}
 };
 </script>

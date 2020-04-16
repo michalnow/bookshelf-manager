@@ -1,4 +1,3 @@
-
 <template>
   <div style="height: 70px">
     <v-app id="app">
