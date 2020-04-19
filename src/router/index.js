@@ -8,6 +8,7 @@ import GenreBookList from "@/components/book/GenreBookList";
 import SignUp from "@/components/userManagment/SignUp";
 import Login from "@/components/userManagment/Login";
 import MyBook from "@/components/bookshelf/MyBook";
+import userBooks from "@/components/userManagment/userBooks";
 Vue.use(Router);
 
 import firebase from "firebase";
@@ -34,6 +35,14 @@ let router = new Router({
       path: "/books",
       name: "BookList",
       component: BookList,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/userBooks/:user",
+      name: "userBooks",
+      component: userBooks,
       meta: {
         requiresAuth: true
       }

@@ -5,7 +5,14 @@
         <v-flex md6>
           <v-row>
             <v-icon>mdi-account</v-icon>
-            <h4 style="textAlign: left;">{{comment.author.substring(0,comment.author.indexOf("@"))}}</h4>
+            <router-link
+              :to="'/userBooks/' + comment.author"
+              style="textDecoration: none; color: black"
+            >
+              <h4
+                style="textAlign: left;"
+              >{{comment.author.substring(0,comment.author.indexOf("@"))}}</h4>
+            </router-link>
             <v-icon
               style="marginLeft: 10px; outline: none; border: none; userSelect: none; fontWeight: bold"
               :color="dynamicColorLike"
@@ -46,7 +53,8 @@ export default {
     return {
       isLoggedIn: false,
       like: false,
-      dislike: false
+      dislike: false,
+      currentUser: ""
     };
   },
   props: {
