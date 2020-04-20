@@ -59,6 +59,14 @@
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field
+                      hint="rating"
+                      v-model="rating"
+                      style="fontSize: 18px;"
+                      persistent-hint
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12>
+                    <v-text-field
                       hint="Poster link"
                       v-model="poster"
                       style="fontSize: 18px;"
@@ -142,7 +150,8 @@ export default {
       pages: null,
       plot: null,
       genre: null,
-      genreArr: null
+      genreArr: null,
+      rating: null
     };
   },
   methods: {
@@ -155,7 +164,8 @@ export default {
           author: this.author,
           poster: this.poster,
           plot: this.plot,
-          pages: this.pages
+          pages: this.pages,
+          rating: parseFloat(this.rating)
         })
         .then(docRef => {
           this.$router.push("/books");
