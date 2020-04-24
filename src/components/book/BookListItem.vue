@@ -61,7 +61,11 @@ export default {
   },
   methods: {
     onLikeClick: async function() {
-      if (!this.book.favourites.includes(this.currentUser)) {
+      if (
+        !this.book.favourites.includes(this.currentUser) &&
+        !this.book.reading.includes(this.currentUser) &&
+        !this.book.wantRead.includes(this.currentUser)
+      ) {
         let bookfavourites = this.book.favourites;
         bookfavourites.push(this.currentUser);
         var batch = db.batch();

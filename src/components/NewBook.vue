@@ -61,6 +61,7 @@
                   <v-flex xs12>
                     <v-text-field
                       hint="rating"
+                      type="number"
                       v-model="rating"
                       style="fontSize: 18px;"
                       persistent-hint
@@ -166,7 +167,8 @@ export default {
           favourites: this.favourites,
           reading: this.reading,
           usersRating: this.usersRating,
-          wantRead: this.wantRead
+          wantRead: this.wantRead,
+          likes: []
         })
         .then(docRef => {
           this.$router.push("/books");
