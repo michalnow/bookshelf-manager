@@ -2,14 +2,13 @@ package com.bai.server.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Book {
 
@@ -17,6 +16,8 @@ public class Book {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @Lob
+    @Column(name="description", length=10000)
     private String description;
     private String author;
     private int pages;

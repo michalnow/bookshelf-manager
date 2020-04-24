@@ -10,7 +10,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/book")
 @CrossOrigin
-public class BookController {
+public class    BookController {
 
     @Autowired
     BookService bookService;
@@ -26,5 +26,10 @@ public class BookController {
     @GetMapping("/all")
     public Iterable<Book> getAllBooks(){
         return bookService.findAll();
+    }
+
+    @GetMapping("/titles")
+    public Iterable<String> getAllTitles(){
+        return bookService.findTitles();
     }
 }
