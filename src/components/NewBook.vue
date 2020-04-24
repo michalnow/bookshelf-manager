@@ -13,12 +13,15 @@
               <form>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-text-field
-                      hint="Title"
+                    <v-select
+                      :items="titles"
+                      @change="onChangeTitle"
+                      hint="Genre"
                       v-model="title"
+                      style="fontSize: 18px"
+                      placeholder="click to select"
                       persistent-hint
-                      style="fontSize: 18px;"
-                    ></v-text-field>
+                    ></v-select>
                   </v-flex>
                 </v-layout>
                 <v-layout row>
@@ -31,14 +34,12 @@
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select
-                      :items="items"
-                      hint="Genre"
+                    <v-text-field
+                      hint="genre"
                       v-model="genre"
-                      style="fontSize: 18px"
-                      placeholder="click to select"
+                      style="fontSize: 18px;"
                       persistent-hint
-                    ></v-select>
+                    ></v-text-field>
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field
@@ -108,41 +109,13 @@
 
 <script>
 import db from "./firebaseInit";
+import axios from "axios";
 export default {
   name: "NewBook",
   data() {
     return {
-      items: [
-        "Art",
-        "Biography",
-        "Business",
-        "Children's",
-        "Christian",
-        "Classics",
-        "Comics",
-        "Cookbooks",
-        "Ebooks",
-        "Fantasy",
-        "Fiction",
-        "Graphic Novels",
-        "Historical Fiction",
-        "History",
-        "Horror",
-        "Memoir",
-        "Music",
-        "Mystery",
-        "Nonfiction",
-        "Poetry",
-        "Psychology",
-        "Romance",
-        "Science",
-        "Science Fiction",
-        "Self Help",
-        "Sports",
-        "Thriller",
-        "Travel",
-        "Young Adult"
-      ],
+      genre: null,
+      titles: null,
       title: null,
       author: null,
       date: null,
@@ -150,11 +123,35 @@ export default {
       pages: null,
       plot: null,
       genre: null,
-      genreArr: null,
-      rating: null
+      rating: 0,
+      books: null,
+      favourites: [],
+      reading: [],
+      usersRating: [],
+      wantRead: []
     };
   },
+  mounted() {
+    axios
+      .get("http://localhost:8081/api/book/all")
+      .then(response => (this.books = response.data));
+
+    axios
+      .get("http://localhost:8081/api/book/titles")
+      .then(response => (this.titles = response.data));
+  },
   methods: {
+    onChangeTitle() {
+      this.books.map(book => {
+        if (book.title == this.title) {
+          this.plot = book.description;
+          this.pages = book.pages;
+          this.genre = book.genre;
+          this.poster = book.poster;
+          this.author = book.author;
+        }
+      });
+    },
     saveBook() {
       db.collection("books")
         .add({
@@ -165,7 +162,11 @@ export default {
           poster: this.poster,
           plot: this.plot,
           pages: this.pages,
-          rating: parseFloat(this.rating)
+          rating: parseFloat(this.rating),
+          favourites: this.favourites,
+          reading: this.reading,
+          usersRating: this.usersRating,
+          wantRead: this.wantRead
         })
         .then(docRef => {
           this.$router.push("/books");

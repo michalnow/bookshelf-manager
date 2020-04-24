@@ -61,7 +61,9 @@ export default {
             poster: doc.data().poster,
             publishDate: doc.data().publishDate,
             rating: parseFloat(doc.data().rating),
-            favourites: doc.data().favourites
+            favourites: doc.data().favourites,
+            reading: doc.data().reading,
+            wantRead: doc.data().wantRead
           };
           this.books.push(data);
         });
