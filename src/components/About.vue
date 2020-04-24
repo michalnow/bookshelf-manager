@@ -64,10 +64,6 @@
       <div id="right" class="aboutRightColumn">
         <ul>
           <li>
-            <div class="aboutMetric">90 million</div>MEMBERS
-          </li>
-          <hr>
-          <li>
             <div class="aboutMetric">{{booksQuantitiy}}</div>BOOKS ADDED
           </li>
           <hr>
