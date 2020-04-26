@@ -39,7 +39,7 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
         <router-link to="/">
           <v-btn text x-large>
-            <v-toolbar-title>Bookshelf Manager</v-toolbar-title>
+            <v-toolbar-title>Bookshelf Manager </v-toolbar-title>
           </v-btn>
         </router-link>
         <v-spacer></v-spacer>
