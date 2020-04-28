@@ -134,11 +134,11 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8081/api/book/all")
+      .get("https://nameless-citadel-95241.herokuapp.com/api/book/all")
       .then(response => (this.books = response.data));
 
     axios
-      .get("http://localhost:8081/api/book/titles")
+      .get("https://nameless-citadel-95241.herokuapp.com/api/book/titles")
       .then(response => (this.titles = response.data));
   },
   methods: {
