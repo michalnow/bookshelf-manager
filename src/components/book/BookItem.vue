@@ -176,6 +176,7 @@ export default {
 
     db.collection("comments")
       .where("bookId", "==", this.$route.params.bookId)
+      .orderBy("date", "desc")
       .onSnapshot(
         snapshot => {
           const documents = snapshot.docs.map(doc => {
