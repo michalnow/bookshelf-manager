@@ -1,5 +1,5 @@
 <template>
-  <v-container  style="margin-top: 30px">
+  <v-container>
     <h3 style="textAlign: center; marginBottom: 20px">{{user}} books</h3>
 
     <v-expansion-panels flat hover popout style="marginTop: -20px" multiple>
@@ -57,7 +57,7 @@
         <v-col>
           <v-expansion-panel>
             <v-expansion-panel style="textAlign: center; ">
-              <v-expansion-panel-header style="textAlign: center; fontSize: 20px">
+              <v-expansion-panel-header style="textAlign:   center; fontSize: 20px">
                 <v-icon color="red" style="textDecoration: none; boxShadow: none">mdi-book</v-icon>
                 <h5>bookshelf</h5>
               </v-expansion-panel-header>
@@ -169,6 +169,7 @@ export default {
   },
   components: {},
   created() {
+    window.scrollTo(0, 0);
     if (firebase.auth().currentUser) {
       this.currentUser = firebase.auth().currentUser.email;
     }

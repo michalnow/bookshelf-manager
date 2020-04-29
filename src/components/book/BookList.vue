@@ -44,6 +44,8 @@ export default {
     BookListItem
   },
   created() {
+    window.scrollTo(0, 0);
+
     if (firebase.auth().currentUser) {
       this.currentUser = firebase.auth().currentUser.email;
     }

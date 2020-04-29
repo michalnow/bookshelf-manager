@@ -100,6 +100,7 @@ export default {
     };
   },
   created() {
+    window.scrollTo(0, 0);
     if (firebase.auth().currentUser) {
       this.currentUser = firebase.auth().currentUser.email;
     }
@@ -120,7 +121,6 @@ export default {
 </script>
 
 <style scoped>
-
 #container {
   margin: 0 auto;
 }

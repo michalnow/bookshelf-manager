@@ -28,6 +28,9 @@ export default {
   },
   props: {
     books: Array
+  },
+  created() {
+    window.scrollTo(0, 0);
   }
 };
 </script>

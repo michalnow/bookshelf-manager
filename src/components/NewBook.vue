@@ -141,6 +141,9 @@ export default {
       .get("https://nameless-citadel-95241.herokuapp.com/api/book/titles")
       .then(response => (this.titles = response.data));
   },
+  created() {
+    window.scrollTo(0, 0);
+  },
   methods: {
     onChangeTitle() {
       this.books.map(book => {

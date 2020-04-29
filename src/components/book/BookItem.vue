@@ -158,6 +158,7 @@ export default {
     }
   },
   created() {
+    window.scrollTo(0, 0);
     if (firebase.auth().currentUser) {
       this.isLoggedIn = true;
       this.currentUser = firebase.auth().currentUser.email;
