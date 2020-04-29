@@ -40,6 +40,7 @@
       <div id="center" class="aboutCenterColumn">
         <h2>What else should you know about Bookshelf Manager?</h2>
         <p>
+          
           All the contents of Bookshelf Manager can be searched even without being a member.
           You must open an account in order to take part in activities, like building your own shelves,
           writing reviews or participating in discussions.

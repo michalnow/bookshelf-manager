@@ -7,7 +7,7 @@
         md4
         align-center
         justify-center
-        v-for="book in books  "
+        v-for="book in books"
         :key="book.id"
         class="float-left pa-4"
       >
@@ -15,13 +15,20 @@
           <v-card width="290px" height="520px">
             <v-chip style="marginBottom: 2px" outlined color="indigo" small>
               <v-icon>mdi-book</v-icon>
-              {{book.genre}}
+              {{ book.genre }}
             </v-chip>
-            <router-link :to="'/book/' + book.id" style="textDecoration: none; color: black">
-              <v-img contain :src="`${book.poster}`" style="backgroundSize: cover; height: 350px "></v-img>
+            <router-link
+              :to="'/book/' + book.id"
+              style="textDecoration: none; color: black"
+            >
+              <v-img
+                contain
+                :src="`${book.poster}`"
+                style="backgroundSize: cover; height: 350px "
+              ></v-img>
               <v-card-title style="textAlign: center">
                 <v-spacer></v-spacer>
-                {{book.title}}
+                {{ book.title }}
                 <v-spacer></v-spacer>
               </v-card-title>
             </router-link>
@@ -46,7 +53,7 @@
         md4
         align-center
         justify-center
-        v-for="book in randomBooks.slice(this.rand, this.rand+5) "
+        v-for="book in randomBooks.slice(this.rand, this.rand + 5)"
         :key="book.id"
         class="float-left pa-4"
       >
@@ -54,13 +61,20 @@
           <v-card width="290px" height="520px">
             <v-chip style="marginBottom: 2px" outlined color="indigo" small>
               <v-icon>mdi-book</v-icon>
-              {{book.genre}}
+              {{ book.genre }}
             </v-chip>
-            <router-link :to="'/book/' + book.id" style="textDecoration: none; color: black">
-              <v-img contain :src="`${book.poster}`" style="backgroundSize: cover; height: 350px "></v-img>
+            <router-link
+              :to="'/book/' + book.id"
+              style="textDecoration: none; color: black"
+            >
+              <v-img
+                contain
+                :src="`${book.poster}`"
+                style="backgroundSize: cover; height: 350px "
+              ></v-img>
               <v-card-title style="textAlign: center">
                 <v-spacer></v-spacer>
-                {{book.title}}
+                {{ book.title }}
                 <v-spacer></v-spacer>
               </v-card-title>
             </router-link>
@@ -80,10 +94,18 @@
 
     <div style="textAlign: center; marginRight: 20px">
       <router-link v-if="!isLoggedIn" link to="/register">
-        <v-btn x-large style="border: solid; borderRadius: 15px; borderColor: indigo">SIgn Up</v-btn>
+        <v-btn
+          x-large
+          style="border: solid; borderRadius: 15px; borderColor: indigo"
+          >SIgn Up</v-btn
+        >
       </router-link>
       <router-link v-if="!isLoggedIn" link to="/login">
-        <v-btn x-large style="border: solid; borderRadius: 15px;borderColor: indigo ">Login&nbsp;</v-btn>
+        <v-btn
+          x-large
+          style="border: solid; borderRadius: 15px;borderColor: indigo "
+          >Login&nbsp;</v-btn
+        >
       </router-link>
     </div>
   </v-container>
