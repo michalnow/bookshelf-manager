@@ -36,6 +36,7 @@
               </v-list>
             </v-menu>
           </v-list-item>
+          
           <v-list-item style="padding: 5px">
             <v-btn
               rounded
@@ -63,8 +64,21 @@
               <h2 style="fontWeight: none">Sign up</h2>
             </v-btn>
           </v-list-item>
+             <v-list-item style="padding: 5px">
+             <v-btn
+              rounded
+              large
+              v-if="!isLoggedIn"
+              link
+              to="/login"
+              style="color: white; padding: 20px; text-transform-none; marginRight: 10px;marginLeft: 10px;"
+              color="green darken-3"
+            >
+          <v-icon>mdi-login</v-icon>
+          <h2 style="fontWeight: none">Log in</h2>
+        </v-btn>
+          </v-list-item>
   
-
           <v-list-item>
             <v-btn
               rounded
@@ -78,6 +92,8 @@
               <h2 style="fontWeight: none">Log out</h2>
             </v-btn>
           </v-list-item>
+
+       
 
           <v-list-item link to="/books" @click="drawer = false">
             <v-list-item-action>
@@ -119,20 +135,7 @@
           </v-btn>
         </router-link>
         <v-spacer></v-spacer>
-        
-
-        <v-btn
-          rounded
-          large
-          v-if="!isLoggedIn"
-          link
-          to="/login"
-          style="marginRight: 10px"
-          color="green darken-3"
-        >
-          <v-icon>mdi-login</v-icon>
-          <h2 style="fontWeight: none">Log in</h2>
-        </v-btn>
+  
       </v-app-bar>
 
       <v-footer color="indigo" app>
