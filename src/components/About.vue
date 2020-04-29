@@ -14,9 +14,10 @@
           </v-flex>
         </v-layout>
       </div>
-
-      <div id="left" class="aboutCenterColumn">
-        <h1>Who We Are</h1>
+<div class="container text-left"> 
+		<div class="row">
+			<div class="col-sm-4" id="aboutCenterColumn">
+				<h1>Who We Are</h1>
         <p>
           <em>Bookshelf Manager</em> is a vertical social network, dedicated to book lovers and all readers.
           Bookshelf Manager is the richest source of information on books and the most independent.
@@ -35,10 +36,9 @@
           <li>Check out your personalized book recommendations.</li>
           <li>Find out if a book is a good fit for you from our community’s reviews.</li>
         </ul>
-      </div>
-
-      <div id="center" class="aboutCenterColumn">
-        <h2>What else should you know about Bookshelf Manager?</h2>
+			</div>
+			<div class="col-sm-4" id="aboutCenterColumn">
+				<h2>What else should you know about Bookshelf Manager?</h2>
         <p>
           All the contents of Bookshelf Manager can be searched even without being a member.
           You must open an account in order to take part in activities, like building your own shelves,
@@ -59,19 +59,21 @@
           your mind.
         </p>
         <p>Knowledge is power, and power is best shared among readers.</p>
-      </div>
-
-      <div id="right" class="aboutRightColumn">
-        <ul>
+			</div>
+			<div class="col-sm-4" id="aboutRightColumn">
+				<ul>
           <li>
-            <div class="aboutMetric">{{booksQuantitiy}}</div>BOOKS ADDED
+            <div id="aboutMetric">{{booksQuantitiy}}</div>BOOKS ADDED
           </li>
           <hr>
           <li>
-            <div class="aboutMetric">{{commentsQuanitiy}}</div>REVIEWS
+            <div id="aboutMetric">{{commentsQuanitiy}}</div>REVIEWS
           </li>
         </ul>
-      </div>
+        </div>   
+		</div>
+	</div>
+      
     </div>
   </v-container>
 </template>
@@ -129,42 +131,18 @@ export default {
   text-align: center;
 }
 
-#left {
-  display: table-cell;
-  min-height: 150px;
-  width: 25%;
-}
-
-#center {
-  display: table-cell;
-  min-height: 150px;
-  width: 50%;
-}
-
-#right {
-  display: table-cell;
-  min-height: 150px;
-  width: 25%;
-}
-
-.aboutCenterColumn h2 {
+#aboutCenterColumn h2 {
   font-size: 18px;
   padding-top: 20px;
 }
 
-.aboutCenterColumn {
-  float: left;
-  width: 540px;
-  padding-top: 20px;
-  margin-right: 20px;
-}
 
-.aboutRightColumn h2 {
+#aboutRightColumn h2 {
   font-family: "Merriweather", Georgia, "Times New Roman", serif;
   font-size: 14px;
 }
 
-.aboutRightColumn {
+#aboutRightColumn {
   color: #181818;
   font-family: "Merriweather", Georgia, "Times New Roman", serif;
   font-size: 14px;
@@ -173,22 +151,22 @@ export default {
   padding-top: 20px;
 }
 
-.aboutRightColumn ul li {
+#aboutRightColumn ul li {
   list-style-type: none;
   padding: 10px 0px 10px 0px;
 }
 
-.aboutMetricBox ul li {
+#aboutMetricBox ul li {
   border-bottom: 1px solid #dddddd;
   list-style-type: none;
   padding-top: 20px;
 }
 
-.aboutMetricBox li:first-child {
+#aboutMetricBox li:first-child {
   padding-top: 10px;
 }
 
-.aboutMetric {
+#aboutMetric {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 36px;
   font-weight: bold;
