@@ -66,6 +66,9 @@ export default {
       password: ""
     };
   },
+  created() {
+    window.scrollTo(0, 0);
+  },
   methods: {
     login: function(e) {
       firebase
