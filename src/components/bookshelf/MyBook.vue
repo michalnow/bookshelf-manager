@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container style="margin-top: 30px">
     <v-expansion-panels flat hover popout style="marginTop: -20px" multiple>
       <v-expansion-panel style="textAlign: center; ">
         <v-expansion-panel-header style="textAlign: center; fontSize: 20px">

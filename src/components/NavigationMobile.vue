@@ -1,15 +1,105 @@
 <template>
-<div id="navigation-mobile">
+  <div id="navigation-mobile">
     <div id="app">
-  
-        <v-navigation-drawer v-model="drawer" app>
-             <v-list dense>
+      <v-navigation-drawer v-model="drawer" app>
+        <v-list dense>
+          <v-list-item v-show="isLoggedIn">
+            <v-menu
+              v-if="isLoggedIn"
+              bottom
+              origin="center center"
+              transition="scale-transition"
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  rounded
+                  large
+                  style=" color: white; padding: 10px; text-transform-none; marginRight: 10px"
+                  v-on="on"
+                  color="indigo darken-4"
+                  >{{ currentUser }}</v-btn
+                >
+              </template>
+
+              <v-list color="indigo">
+                <v-list-item style="textAlign: center">
+                  <router-link
+                    :to="'/' + userUid + '/myBooks'"
+                    style="textDecoration: none; textAlign: center"
+                  >
+                    <v-list-item-title
+                      style="color: white; fontWeight: bold; fontSize: 20px"
+                      >My books</v-list-item-title
+                    >
+                  </router-link>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-list-item>
+          <v-list-item style="padding: 5px">
+            <v-btn
+              rounded
+              large
+              link
+              to="/about"
+              style="color: white; padding: 20px; text-transform-none; marginRight: 10px; marginLeft: 10px"
+              color="indigo darken-4"
+            >
+              <h2 style="fontWeight: none">&nbsp;About</h2>
+            </v-btn>
+          </v-list-item>
+          <v-list-item style="padding: 5px" v-show="!isLoggedIn"> 
+            <v-btn
+            
+              rounded
+              large
+              v-if="!isLoggedIn"
+              link
+              to="/register"
+              style="color: white; padding: 20px; text-transform-none; marginRight: 10px;marginLeft: 10px;"
+              color="indigo darken-4"
+              
+            >
+              <h2 style="fontWeight: none">Sign up</h2>
+            </v-btn>
+          </v-list-item>
+          <v-list-item style="padding: 5px" v-show="!isLoggedIn">
+            <v-btn
+              rounded
+              large
+              v-if="!isLoggedIn"
+              link
+              to="/login"
+              style="color: white; padding: 20px; text-transform-none; marginRight: 10px;marginLeft: 10px"
+              color="green darken-3"
+            >
+              <v-icon>mdi-login</v-icon>
+              <h2 style="fontWeight: none">Log in</h2>
+            </v-btn>
+          </v-list-item>
+
+          <v-list-item>
+            <v-btn
+              rounded
+              large
+              v-if="isLoggedIn"
+              v-on:click="logout"
+              style="marginRight: 10px"
+              color="red darken-4"
+            >
+              <v-icon>mdi-logout</v-icon>
+              <h2 style="fontWeight: none">Log out</h2>
+            </v-btn>
+          </v-list-item>
+
           <v-list-item link to="/books" @click="drawer = false">
             <v-list-item-action>
               <v-icon>mdi-book</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title style="fontSize: 16px">All Books  </v-list-item-title>
+              <v-list-item-title style="fontSize: 16px"
+                >All Books
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item link to="/add" @click="drawer = false">
@@ -29,22 +119,25 @@
             v-bind:key="genre"
             @click="forceReload"
           >
-            <v-list-item-title>{{genre}}</v-list-item-title>
+            <v-list-item-title>{{ genre }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-    
-    
-       
- <v-app-bar app color="indigo" dark>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
+
+      <v-app-bar app color="indigo" dark>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
         <router-link to="/">
           <v-btn text x-large>
             <v-toolbar-title>Bookshelf Manager</v-toolbar-title>
           </v-btn>
         </router-link>
         <v-spacer></v-spacer>
-        <v-menu v-if="isLoggedIn" bottom origin="center center" transition="scale-transition">
+        <v-menu
+          v-if="isLoggedIn"
+          bottom
+          origin="center center"
+          transition="scale-transition"
+        >
           <template v-slot:activator="{ on }">
             <v-btn
               rounded
@@ -52,11 +145,23 @@
               style=" color: white; padding: 10px; text-transform-none; marginRight: 10px"
               v-on="on"
               color="indigo darken-4"
-            >{{currentUser}}</v-btn>
+              >{{ currentUser }}</v-btn
+            >
           </template>
+          <v-list color="indigo">
+                <v-list-item style="textAlign: center">
+                  <router-link
+                    :to="'/' + userUid + '/myBooks'"
+                    style="textDecoration: none; textAlign: center"
+                  >
+                    <v-list-item-title
+                      style="color: white; fontWeight: bold; fontSize: 20px"
+                      >My books</v-list-item-title
+                    >
+                  </router-link>
+                </v-list-item>
+              </v-list>
         </v-menu>
-
-    
       </v-app-bar>
 
       <v-footer color="indigo" app>
@@ -64,9 +169,8 @@
         <h5 style="color: white">&copy; 2020</h5>
         <v-spacer></v-spacer>
       </v-footer>
-
+    </div>
   </div>
-</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="book != null">
+  <v-container v-if="book != null" style="margin-top: 30px">
     <v-row>
       <v-col md="2"></v-col>
       <v-col md="8">

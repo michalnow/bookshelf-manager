@@ -9,15 +9,12 @@
               <v-icon>mdi-book</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title style="fontSize: 16px">All Books</v-list-item-title>
+              <v-list-item-title style="fontSize: 16px"
+                >All Books
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item
-            v-if="currentUser == 'admin@admin.com'"
-            link
-            to="/add"
-            @click="drawer = false"
-          >
+          <v-list-item link to="/add" @click="drawer = false">
             <v-list-item-action>
               <v-icon>mdi-plus</v-icon>
             </v-list-item-action>

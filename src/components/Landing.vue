@@ -1,6 +1,6 @@
 <template>
   <v-container v-if="randomBooks !== null">
-    <div class="float-left pa-4">
+    <div class="float-left pa-4" style="margin-top: 30px">
       <h3 style="textAlign: left; padding: 4">MOST POPULAR BOOKS</h3>
       <v-flex
         xs12
