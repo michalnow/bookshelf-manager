@@ -1,5 +1,5 @@
 <template >
-  <div>
+  <div style="margin-top: 30px">
     <v-flex xs12 md4 class="float-left pa-4">
       <v-card width="320px" height="520px" v-if="book != null">
         <v-row>

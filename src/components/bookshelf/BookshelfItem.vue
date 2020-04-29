@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="float-left pa-3">
+  <v-flex xs12 class="float-left pa-3" style="margin-top: 30px">
     <v-card width="180px" height="240px;" v-if="book != null" shaped>
       <v-row style="textAlign: center">
         <v-col style="marginTop: -12px">

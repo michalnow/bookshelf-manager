@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container style="margin-top: 30px">
     <v-layout row wrap>
       <v-flex xs2 sm6 offset-sm3 align-center justify-center>
         <v-card class="elevation-12">

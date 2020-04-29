@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container  style="margin-top: 30px">
     <h3 style="textAlign: center; marginBottom: 20px">{{user}} books</h3>
 
     <v-expansion-panels flat hover popout style="marginTop: -20px" multiple>

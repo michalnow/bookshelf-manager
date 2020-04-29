@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <div id="app">
-      <NavigationMobile />
-      <div class="content" :class="{'open':showNav}">
+    <div id="app" style="margin-top: 30px">
+      <NavigationMobile v-show="mobileView"/>
+      <div class="content" :class="{'open':showNav}" >
               <div class="top-bar">
                
                 <Navbar v-if="!mobileView" />

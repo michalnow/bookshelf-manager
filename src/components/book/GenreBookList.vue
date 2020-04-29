@@ -1,5 +1,5 @@
 <template>
-  <div class="offset-2">
+  <div class="offset-2" style="margin-top: 30px">
     <v-flex
       xs12
       md4

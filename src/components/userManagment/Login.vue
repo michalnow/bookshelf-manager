@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-layout row wrap>
-      <v-flex xs2 sm6 offset-sm12 align-center justify-center>
+    <v-layout row wrap style="margin-top: 30px">
+      <v-flex sm6 offset-sm3 align-center justify-center>
         <v-card class="elevation-12">
           <v-toolbar color="indigo">
             <v-spacer></v-spacer>
