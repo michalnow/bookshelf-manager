@@ -24,7 +24,7 @@
                   >
                     <v-list-item-title
                       style="color: white; fontWeight: bold; fontSize: 20px"
-                      >My books</v-list-item-title
+                      >My books </v-list-item-title
                     >
                   </router-link>
                 </v-list-item>
