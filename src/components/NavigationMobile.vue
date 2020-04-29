@@ -119,37 +119,7 @@
           </v-btn>
         </router-link>
         <v-spacer></v-spacer>
-        <v-menu
-          v-if="isLoggedIn"
-          bottom
-          origin="center center"
-          transition="scale-transition"
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn
-              rounded
-              large
-              style=" color: white; padding: 10px; text-transform-none; marginRight: 10px"
-              v-on="on"
-              color="indigo darken-4"
-              >{{ currentUser }}</v-btn
-            >
-          </template>
-          <v-list color="indigo">
-                <v-list-item style="textAlign: center">
-                  <router-link
-                    :to="'/' + userUid + '/myBooks'"
-                    style="textDecoration: none; textAlign: center"
-                  >
-                    <v-list-item-title
-                      style="color: white; fontWeight: bold; fontSize: 20px"
-                      >My books</v-list-item-title
-                    >
-                  </router-link>
-                </v-list-item>
-              </v-list>
-          
-        </v-menu>
+        
 
         <v-btn
           rounded
