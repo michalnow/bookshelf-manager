@@ -3,7 +3,7 @@
     <div id="app">
       <v-navigation-drawer v-model="drawer" app>
         <v-list dense>
-          <v-list-item v-show="isLoggedIn">
+          <v-list-item v-show="isLoggedIn" style="margin-left:-10px">
             <v-menu
               v-if="isLoggedIn"
               bottom
@@ -11,14 +11,9 @@
               transition="scale-transition"
             >
               <template v-slot:activator="{ on }">
-                <v-btn
-                  rounded
-                  large
-                  style=" color: white; padding: 10px; text-transform-none; marginRight: 10px"
-                  v-on="on"
-                  color="indigo darken-4"
-                  >{{ currentUser }}</v-btn
-                >
+                <v-btn outlined color="indigo" v-on="on">{{
+                  currentUser
+                }}</v-btn>
               </template>
 
               <v-list color="indigo">
@@ -29,75 +24,69 @@
                   >
                     <v-list-item-title
                       style="color: white; fontWeight: bold; fontSize: 20px"
-                      >My books</v-list-item-title
+                      >My books </v-list-item-title
                     >
                   </router-link>
                 </v-list-item>
               </v-list>
             </v-menu>
           </v-list-item>
-          
-          <v-list-item style="padding: 5px">
-            <v-btn
-              rounded
-              large
-              link
-              to="/about"
-              style="color: white; padding: 20px; text-transform-none; marginRight: 10px; marginLeft: 10px"
-              color="indigo darken-4"
-            >
-              <h2 style="fontWeight: none">&nbsp;About</h2>
-            </v-btn>
-          </v-list-item>
-          <v-list-item style="padding: 5px" v-show="!isLoggedIn"> 
-            <v-btn
-            
-              rounded
-              large
-              v-if="!isLoggedIn"
-              link
-              to="/register"
-              style="color: white; padding: 20px; text-transform-none; marginRight: 10px;marginLeft: 10px;"
-              color="indigo darken-4"
-              
-            >
-              <h2 style="fontWeight: none">Sign up</h2>
-            </v-btn>
-          </v-list-item>
-             <v-list-item style="padding: 5px">
-             <v-btn
-              rounded
-              large
-              v-if="!isLoggedIn"
-              link
-              to="/login"
-              style="color: white; padding: 20px; text-transform-none; marginRight: 10px;marginLeft: 10px;"
-              color="green darken-3"
-            >
-          <v-icon>mdi-login</v-icon>
-          <h2 style="fontWeight: none">Log in</h2>
-        </v-btn>
-          </v-list-item>
-  
-          <v-list-item>
-            <v-btn
-              rounded
-              large
-              v-if="isLoggedIn"
-              v-on:click="logout"
-              style="marginRight: 10px"
-              color="red darken-4"
-            >
-              <v-icon>mdi-logout</v-icon>
-              <h2 style="fontWeight: none">Log out</h2>
-            </v-btn>
+
+          <v-list-item link to="/about" @click="drawer = false">
+            <v-list-item-action>
+              <v-icon>fa-info</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title style="fontSize: 16px"
+                >About
+              </v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
 
-       
+          <v-list-item
+            v-show="!isLoggedIn"
+            to="/register"
+            @click="drawer = false"
+          >
+            <v-list-item-action>
+              <v-icon>fa-user-plus</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title style="fontSize: 16px"
+                >Sign up
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item v-show="!isLoggedIn" to="/login" @click="drawer = false">
+            <v-list-item-action>
+              <v-icon>fa-sign-in-alt</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title style="fontSize: 16px"
+                >Log in
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item
+            v-if="isLoggedIn"
+            v-on:click="logout"
+            @click="drawer = false"
+          >
+            <v-list-item-action>
+              <v-icon>fa-sign-out-alt</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title style="fontSize: 16px"
+                >Log out
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
           <v-list-item link to="/books" @click="drawer = false">
             <v-list-item-action>
-              <v-icon>mdi-book</v-icon>
+              <v-icon>fa-book</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title style="fontSize: 16px"
@@ -107,10 +96,10 @@
           </v-list-item>
           <v-list-item link to="/add" @click="drawer = false">
             <v-list-item-action>
-              <v-icon>mdi-plus</v-icon>
+              <v-icon>fa-plus</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Add</v-list-item-title>
+              <v-list-item-title style="fontSize: 16px">Add</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
@@ -135,7 +124,6 @@
           </v-btn>
         </router-link>
         <v-spacer></v-spacer>
-  
       </v-app-bar>
 
       <v-footer color="indigo" app>
