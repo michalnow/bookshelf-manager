@@ -42,8 +42,6 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, "../dist"),
     assetsSubDirectory: "static",
     assetsPublicPath: "/",
-    publicPath:
-      process.env.NODE_ENV === "production" ? "/bookshelf-manager/" : "/",
 
     /**
      * Source Maps
