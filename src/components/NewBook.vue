@@ -16,7 +16,7 @@
                     <v-select
                       :items="titles"
                       @change="onChangeTitle"
-                      hint="Genre"
+                      hint="Book"
                       v-model="title"
                       style="fontSize: 18px"
                       placeholder="click to select"
