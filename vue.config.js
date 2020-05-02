@@ -1,3 +1,4 @@
 module.exports = {
-  publicPath: "/bookshelf-manager/"
+  publicPath:
+    process.env.NODE_ENV === "production" ? "/bookshelf-manager/" : "/"
 };
