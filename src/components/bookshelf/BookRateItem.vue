@@ -1,7 +1,7 @@
 <template >
   <div style="margin-top: 30px">
     <v-flex xs12 md12 class="float-left pa-4">
-      <v-card width="330px" height="555px" v-if="book != null">
+      <v-card width="auto" v-if="book != null">
         <v-row>
           <v-col style="marginTop: -12px">
             <v-chip style="marginBottom: 2px" outlined color="white" small>
