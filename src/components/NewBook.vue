@@ -1,7 +1,7 @@
 <template>
   <v-container style="margin-top: 30px">
     <v-layout row wrap>
-      <v-flex xs2 sm6 offset-sm3 align-center justify-center>
+      <v-flex sm6 xs12 offset-sm3 align-center justify-center>
         <v-card class="elevation-12">
           <v-toolbar color="indigo">
             <v-spacer></v-spacer>
@@ -16,7 +16,7 @@
                     <v-select
                       :items="titles"
                       @change="onChangeTitle"
-                      hint="Genre"
+                      hint="Book"
                       v-model="title"
                       style="fontSize: 18px"
                       placeholder="click to select"
